@@ -1,16 +1,20 @@
-'use  client';
-'import React, { useEffect } from 'react'
+'use client'
+import React, {useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './Navbar';
 
 const Template = ({children}) => {
 
-    useEffect( () => {
+    useEffect(() => {
         require('bootstrap/dist/js/bootstrap.bundle.min.js')
     }, [])
 
   return (
-    <div>{children}</div>
+    <div>
+      <Navbar/>
+      {children}
+    </div>
   )
 }
 
-export default Template
+export default Template;
