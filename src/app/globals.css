@@ -4,3 +4,10 @@
     padding: 5px 10px;
     color: white;
 }
+
+.loginBtn{
+    background-color: rgb(25, 212, 200);
+    border: none;
+    padding: 5px 10px;
+    color: white;
+}
