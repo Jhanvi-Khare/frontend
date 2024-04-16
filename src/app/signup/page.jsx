@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 const SignupSchema = Yup.object().shape({
   name : Yup.string().min(4, 'Name pura likho' ).required('Naam nhi hai kya?'),
   email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().require('Password is required')
+  password: Yup.string().required('Password is required')
   .min(6, 'Too small')
 });
 
@@ -35,7 +35,7 @@ const Signup = () => {
               <div className="row g-0">
                 <div className="col-xl-6 d-none d-xl-block">
                   <div style={{
-                    backgroundImage: url('https://assets.materialup.com/uploads/7563d4bc-0ed9-4202-a86c-ac8dc46e73ef/preview.jpg'),
+                    backgroundImage:`url('https://w7.pngwing.com/pngs/870/93/png-transparent-sign-up-illustration-button-computer-icons-red-sign-up-now-button-image-file-formats-text-presentation-thumbnail.png')`,
                     height: '100%',
                     backgroundPosition: 'center',
                     backgroundSize: 'contain',
@@ -68,9 +68,9 @@ const Signup = () => {
                           placeholder=""
                         />
                         {
-                          signupForm.touched.email &&
+                          signupForm.touched.email && (
                           <small class="text-danger">{signupForm.errors.email}</small>
-                        }
+                        )}
                       </div>
                       <div class="mb-3">
                         <label for="" class="form-label">Name</label>
@@ -83,9 +83,9 @@ const Signup = () => {
                           placeholder=""
                         />
                         {
-                          signupForm.touched.name &&
+                          signupForm.touched.name && (
                           <small class="text-danger">{signupForm.errors.name}</small>
-                        }
+                        )}
                       </div>
                       <div class="mb-3">
                         <label for="" class="form-label">Password</label>
@@ -98,9 +98,9 @@ const Signup = () => {
                           placeholder=""
                         />
                         {
-                          signupForm.touched.password &&
+                          signupForm.touched.password && (
                           <small class="text-danger">{signupForm.errors.password}</small>
-                        }
+                        )}
                       </div>
                       <div class="mb-3">
                         <label for="" class="form-label">Confirm Password</label>
@@ -113,9 +113,9 @@ const Signup = () => {
                           placeholder=""
                         />
                         {
-                          signupForm.touched.confirmPassword &&
+                          signupForm.touched.confirmPassword && (
                           <small class="text-danger">{signupForm.errors.confirmPassword}</small>
-                        }
+                        )}
                       </div>
                       <div className="form-check mb-4">
                         <input
