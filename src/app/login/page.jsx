@@ -2,156 +2,122 @@
 import { useFormik } from 'formik';
 import Link from 'next/link';
 import React from 'react'
+import classes from './login.module.css'
 import * as Yup from 'yup';
 
-const SignupSchema = Yup.object().shape({
-  name : Yup.string().min(4, 'Name pura likho' ).required('Naam nhi hai kya?'),
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().required('Password is required')
-  .min(6, 'Too small')
+const loginValidationSchema = Yup.object().shape({
+  email: Yup.string().email('Invalid Email').required('Email is Required'),
+  password : Yup.string().required('Password is Required')
 });
 
 const Login = () => {
-      const loginForm = useFormik({
+
+  const loginForm = useFormik({
       initialValues: {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    },
-    onSubmit: (values) => {
-      console.log(values);
-     
-    },
-    validationSchema: loginSchema
-  });
+          email : '',
+          password : ''
+      },
+      onSubmit : (values) => {
+          console.log(values);
+          // send data to backend
+      },
+      validationSchema: loginValidationSchema
+  })
 
   return (
-    <section className="vh-100 bg-primary-subtle">
-      <div className="container py-5 h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col">
-            <div className="card shadow my-4">
-              <div className="row g-0">
-                <div className="col-xl-6 d-none d-xl-block">
-                  <div style={{
-                    backgroundImage:`url('https://w7.pngwing.com/pngs/870/93/png-transparent-sign-up-illustration-button-computer-icons-red-sign-up-now-button-image-file-formats-text-presentation-thumbnail.png')`,
-                    height: '100%',
-                    backgroundPosition: 'center',
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat'
-                  }}>
+      <div className='vh-100 bg-primary-subtle d-flex align-items-center'>
+          <section className="container">
+              <div
+                  className="px-4 py-5 px-md-5 text-center text-lg-start"
+              >
+                  <div className="container">
+                      <div className="row gx-lg-5 align-items-center">
+                          <div className="col-lg-6 mb-5 mb-lg-0">
+                              <h1 className="my-5 display-3 fw-bold ls-tight">
+                                  Welcome
+                                  <span className="text-primary"> Back</span>
+                              </h1>
+                              <p style={{ color: "hsl(217, 10%, 50.8%)" }}>
+                                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
+                                  itaque accusantium odio, soluta, corrupti aliquam quibusdam
+                                  tempora at cupiditate quis eum maiores libero veritatis? Dicta
+                                  facilis sint aliquid ipsum atque?
+                              </p>
+                          </div>
+                          <div className="col-lg-5 col-md-6 mb-5 mb-lg-0 mx-auto">
+                              <div className="card shadow">
+                                  <div className="card-body py-5 px-md-5">
+                                      <h4 className='text-center fw-bold text-primary my-4'>Login To Continue</h4>
+                                      <form onSubmit={ loginForm.handleSubmit }>
+                                          {/* 2 column grid layout with text inputs for the first and last names */}
+                                          <div className="mb-3">
+                                              <label for="" className="form-label">Email Address *</label>
+                                              <input
+                                                  type="text"
+                                                  id="email"
+                                                  onChange={ loginForm.handleChange }
+                                                  value={loginForm.values.email}
+                                                  className="form-control"
+                                                  placeholder=""
+                                              />
+                                              {
+                                                  loginForm.touched.email &&
+                                                  <small className="text-danger">{loginForm.errors.email}</small>
+                                              }
+                                          </div>
+                                          <div class="mb-3">
+                                              <label for="" className="form-label">Password</label>
+                                              <input
+                                                  type="password"
+                                                  id="password"
+                                                  onChange={ loginForm.handleChange }
+                                                  value={loginForm.values.password}
+                                                  className="form-control"
+                                                  placeholder=""
+                                              />
+                                              {
+                                                  loginForm.touched.password &&
+                                                  <small className="text-danger">{loginForm.errors.password}</small>
+                                              }
+                                          </div>
 
+                                          <div className="form-check mb-4">
+                                              <input
+                                                  className="form-check-input me-2"
+                                                  type="checkbox"
+                                                  defaultValue=""
+                                                  id="form2Example33"
+                                                  defaultChecked=""
+                                              />
+                                              <label
+                                                  className="form-check-label"
+                                                  htmlFor="form2Example33"
+                                              >
+                                                  Remember Me
+                                              </label>
+                                          </div>
+                                          {/* Submit button */}
+                                          <button
+                                              type="submit"
+                                              className="btn btn-primary w-100 mb-4"
+                                          >
+                                              Login Now
+                                          </button>
+                                          <div className="text-center">
+                                              <p>Not Registered Yet</p>
+                                              <Link href='/signup'>Register Here</Link>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
                   </div>
-                  {/* <img
-                    src="https://assets.materialup.com/uploads/7563d4bc-0ed9-4202-a86c-ac8dc46e73ef/preview.jpg"
-                    alt="Sample"
-                    className="img-fluid"
-                  /> */}
-                </div>
-                <div className="col-xl-6">
-
-                  <div className="card-body p-md-5">
-                    <h3 className="mb-5 text-primary fw-bold">
-                      Registration Form
-                    </h3>
-                    <form onSubmit={loginForm.handleSubmit}>
-
-                      <div class="mb-3">
-                        <label for="" class="form-label">Email Address</label>
-                        <input
-                          type="text"
-                          id="email"
-                          onChange={loginForm.handleChange}
-                          value={loginForm.values.email}
-                          class="form-control"
-                          placeholder=""
-                        />
-                        {
-                          loginForm.touched.email && (
-                          <small class="text-danger">{loginForm.errors.email}</small>
-                        )}
-                      </div>
-                      <div class="mb-3">
-                        <label for="" class="form-label">Name</label>
-                        <input
-                          type="text"
-                          id="name"
-                          onChange={loginForm.handleChange}
-                          value={loginForm.values.name}
-                          class="form-control"
-                          placeholder=""
-                        />
-                        {
-                          loginForm.touched.name && (
-                          <small class="text-danger">{loginForm.errors.name}</small>
-                        )}
-                      </div>
-                      <div class="mb-3">
-                        <label for="" class="form-label">Password</label>
-                        <input
-                          type="text"
-                          id="password"
-                          onChange={loginForm.handleChange}
-                          value={loginForm.values.password}
-                          class="form-control"
-                          placeholder=""
-                        />
-                        {
-                          loginForm.touched.password && (
-                          <small class="text-danger">{loginForm.errors.password}</small>
-                        )}
-                      </div>
-                      <div class="mb-3">
-                        <label for="" class="form-label">Confirm Password</label>
-                        <input
-                          type="password"
-                          id="confirmPassword"
-                          onChange={loginForm.handleChange}
-                          value={loginForm.values.confirmPassword}
-                          class="form-control"
-                          placeholder=""
-                        />
-                        {
-                         loginFormyouched.confirmPassword && (
-                          <small class="text-danger">{loginForm.errors.confirmPassword}</small>
-                        )}
-                      </div>
-                      <div className="form-check mb-4">
-                        <input
-                          className="form-check-input me-2"
-                          type="checkbox"
-                          defaultValue=""
-                          id="form2Example33"
-                          defaultChecked=""
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="form2Example33"
-                        >
-                          I Agree to Terms & Conditions
-                        </label>
-                      </div>
-                      <div className="d-flex justify-content-end pt-3">
-                        <button type="button" className="btn btn-light">
-                          Reset all
-                        </button>
-                        <button type="submit" className="btn btn-primary ms-2">
-                          Submit form
-                        </button>
-                      </div>
-                    </form>
-
-                    <p>Already Registered? <Link href='/login'>Login Here</Link></p>
-
-                  </div>
-                </div>
               </div>
-            </div>
-          </div>
-        </div>
+              {/* Jumbotron */}
+          </section>
+          {/* Section: Design Block */}
       </div>
-    </section>
 
   )
 }

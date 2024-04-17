@@ -5,10 +5,15 @@ import React from 'react'
 import * as Yup from 'yup';
 
 const SignupSchema = Yup.object().shape({
-  name : Yup.string().min(4, 'Name pura likho' ).required('Naam nhi hai kya?'),
+  name : Yup.string().min(4, 'Name pura likho' ).required('????'),
   email: Yup.string().email('Invalid email').required('Required'),
   password: Yup.string().required('Password is required')
-  .min(6, 'Too small')
+    .min(6, 'Too small').matches(/[a-z]/, 'must include lowercase letter')
+    .matches(/[A-Z]/, 'must include uppercase letter')
+    .matches(/[0-9]/, 'must include number')
+    .matches(/\W/, 'must include special character'),
+  confirmPassword: Yup.string().oneOf([Yup.ref('password'),null], 'Password must match')
+    .required('Password is required')
 });
 
 const Signup = () => {
@@ -90,7 +95,7 @@ const Signup = () => {
                       <div class="mb-3">
                         <label for="" class="form-label">Password</label>
                         <input
-                          type="text"
+                          type="password"
                           id="password"
                           onChange={signupForm.handleChange}
                           value={signupForm.values.password}
